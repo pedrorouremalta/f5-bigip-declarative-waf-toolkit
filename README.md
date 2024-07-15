@@ -19,6 +19,20 @@ $export BIGIP_USERNAME="admin"
 $export BIGIP_PASSWORD="admin"
 ```
 
+## Listing WAF policies (--action 'list-waf-policies')
+
+To list all WAF policies:
+
+```
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action list-waf-policies
+```
+```
+1: /Common/asmpolicy_app4 (zOVIyaxoJVb1Talpn1aedA)
+2: /Common/asmpolicy_app3 (XWPS7guLOaacZKlMlJWpGQ)
+3: /Common/asmpolicy_app2 (sgV4mAIDujF5f5LMoBJbUQ)
+4: /Common/asmpolicy_app1 (EpjFk_R-Eyi7fOxpy4i6BA)
+```
+
 ## Exporting a WAF policy (--action 'export-waf-policy')
 
 To export a WAF policy:
@@ -79,4 +93,45 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 ```
 [INFO]: Exporting learning suggestions for the policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.suggestions.json'.
 [INFO]: Learning suggestions successfully exported.
+```
+
+To export the *learning suggestions* for a WAF policy in **debug** mode (*--log-level debug*):
+
+```
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-suggestions --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.suggestions.json --log-level debug
+```
+```
+[INFO]: Exporting learning suggestions for the policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.suggestions.json'.
+[DEBUG]: Retrieving WAF policies.
+[DEBUG]: Starting new HTTPS connection (1): X.X.X.X:443
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/policies?$select=name,id,fullPath,link HTTP/11" 200 1032
+[DEBUG]: WAF policies successfully retrieved.
+[DEBUG]: Running a 'export-suggestions' task.
+[DEBUG]: https://X.X.X.X:443 "POST /mgmt/tm/asm/tasks/export-suggestions HTTP/11" 201 302
+[DEBUG]: Waiting for the 'export-suggestions' task to complete.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-suggestions/vV6o1QQJKUr-rLDvVc9hAg HTTP/11" 200 3391
+[DEBUG]: The 'export-suggestions' task completed successfully.
+[INFO]: Learning suggestions successfully exported.
+```
+
+## Importing a WAF policy:
+
+To import a WAF policy **without** suggestions (only *--policy-file* option):
+
+```
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app2 --policy-file ./asmpolicy_app2.json
+```
+```
+[INFO]: Importing WAF policy '/Common/asmpolicy_app2' from file './tmp/asmpolicy_app2.json' (no suggestions).
+[INFO]: WAF Policy successfully imported (no suggestions).
+```
+
+To import a WAF policy **with** suggestions (*--policy-file* and *--suggestions-file*):
+
+```
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app2 --policy-file ./tmp/asmpolicy_app2.json --suggestions-file ./tmp/asmpolicy_app2.suggestions.json
+```
+```
+[INFO]: Importing WAF policy '/Common/asmpolicy_app2' from file './tmp/asmpolicy_app2.json' with suggestions from './tmp/asmpolicy_app2.suggestions.json'.
+[INFO]: WAF Policy successfully imported (suggestions applied).
 ```
