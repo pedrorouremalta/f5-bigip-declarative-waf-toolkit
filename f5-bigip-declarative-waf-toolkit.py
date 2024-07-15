@@ -495,7 +495,7 @@ class AWAF:
             
         return 0
 
-    def list_waf_policies(self) -> None:
+    def list_waf_policies(self) -> int:
 
         ret = self._get_waf_policies()
         if ret != 0:
