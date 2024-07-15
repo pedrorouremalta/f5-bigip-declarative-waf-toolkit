@@ -24,17 +24,17 @@ $export BIGIP_PASSWORD="admin"
 To export a WAF policy:
 
 ```
-python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json
 ```
 ```
 [INFO]: Exporting WAF policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.json'.
 [INFO]: WAF policy successfully exported.
 ```
 
-To export a WAF policy using 'full' export mode (*--export-mode full*):
+To export a WAF policy using **full** export mode (*--export-mode full*):
 
 ```
-python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json --export-mode full
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json --export-mode full
 ```
 ```
 [INFO]: Exporting WAF policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.json'.
@@ -44,7 +44,7 @@ python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $B
 To export a WAF policy in **debug** mode (*--log-level debug*):
 
 ```
-python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json --log-level debug
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json --log-level debug
 ```
 ```
 [INFO]: Exporting WAF policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.json'.
