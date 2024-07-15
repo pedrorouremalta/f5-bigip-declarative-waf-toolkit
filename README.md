@@ -14,9 +14,9 @@ It can be used to:
 ## Preparing environment variables
 
 ```
-$export BIGIP_ADDRESS="X.X.X.X"
-$export BIGIP_USERNAME="admin"
-$export BIGIP_PASSWORD="admin"
+export BIGIP_ADDRESS="X.X.X.X"
+export BIGIP_USERNAME="admin"
+export BIGIP_PASSWORD="admin"
 ```
 
 ## Listing WAF policies (--action 'list-waf-policies')
@@ -24,7 +24,7 @@ $export BIGIP_PASSWORD="admin"
 To list all WAF policies:
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action list-waf-policies
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action list-waf-policies
 ```
 ```
 1: /Common/asmpolicy_app4 (zOVIyaxoJVb1Talpn1aedA)
@@ -38,7 +38,7 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 To export a WAF policy:
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json
 ```
 ```
 [INFO]: Exporting WAF policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.json'.
@@ -48,7 +48,7 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 To export a WAF policy using **full** export mode (*--export-mode full*):
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json --export-mode full
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json --export-mode full
 ```
 ```
 [INFO]: Exporting WAF policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.json'.
@@ -58,7 +58,7 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 To export a WAF policy in **debug** mode (*--log-level debug*):
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json --log-level debug
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-policy --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.json --log-level debug
 ```
 ```
 [INFO]: Exporting WAF policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.json'.
@@ -88,7 +88,7 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 To export the *learning suggestions* for a WAF policy:
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-suggestions --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.suggestions.json
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-suggestions --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.suggestions.json
 ```
 ```
 [INFO]: Exporting learning suggestions for the policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.suggestions.json'.
@@ -98,7 +98,7 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 To export the *learning suggestions* for a WAF policy in **debug** mode (*--log-level debug*):
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-suggestions --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.suggestions.json --log-level debug
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-suggestions --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.suggestions.json --log-level debug
 ```
 ```
 [INFO]: Exporting learning suggestions for the policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.suggestions.json'.
@@ -129,7 +129,7 @@ python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $B
 To import a WAF policy **with** suggestions (*--policy-file* and *--suggestions-file*):
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app1 --policy-file ./tmp/asmpolicy_app1.json --suggestions-file ./tmp/asmpolicy_app1.suggestions.json
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app1 --policy-file ./tmp/asmpolicy_app1.json --suggestions-file ./tmp/asmpolicy_app1.suggestions.json
 ```
 ```
 [INFO]: Importing WAF policy '/Common/asmpolicy_app1' from file './tmp/asmpolicy_app1.json' with suggestions from './tmp/asmpolicy_app1.suggestions.json'.
@@ -141,7 +141,7 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 To export all WAF policies in a declarative format:
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-all-waf-policies --directory ./tmp
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-all-waf-policies --directory ./tmp
 ```
 ```
 [INFO]: Exporting WAF policy '/Common/asmpolicy_app4' to the file './tmp/Common_asmpolicy_app4.json'.
@@ -157,7 +157,7 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 To export all WAF policies in a declarative format using **full** export mode (*--export-mode full*) and with **debug** mode enabled:
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-all-waf-policies --directory ./tmp --export-mode full --log-level debug
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-all-waf-policies --directory ./tmp --export-mode full --log-level debug
 ```
 ```
 [DEBUG]: Retrieving WAF policies.
