@@ -68,3 +68,15 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 [DEBUG]: WAF Policy sucessfully saved to file.
 [INFO]: WAF policy successfully exported.
 ```
+
+## Exporting Learning Suggestions (--action 'export-waf-suggestions')
+
+To export the *learning suggestions* for a WAF policy:
+
+```
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-waf-suggestions --policy /Common/asmpolicy_app1 --output ./tmp/asmpolicy_app1.suggestions.json
+```
+```
+[INFO]: Exporting learning suggestions for the policy '/Common/asmpolicy_app1' to the file './tmp/asmpolicy_app1.suggestions.json'.
+[INFO]: Learning suggestions successfully exported.
+```
