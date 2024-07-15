@@ -119,7 +119,7 @@ python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $B
 To import a WAF policy **without** suggestions (only *--policy-file* option):
 
 ```
-python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app1 --policy-file ./asmpolicy_app1.json
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app1 --policy-file ./tmp/asmpolicy_app1.json
 ```
 ```
 [INFO]: Importing WAF policy '/Common/asmpolicy_app1' from file './tmp/asmpolicy_app1.json' (no suggestions).
