@@ -470,11 +470,28 @@ class AWAF:
 
         for policy in self._waf_policies:
             
-            policy_export_path = f"{directory}/{policy[1:].replace('/','_')}.json"
+            output = f"{directory}/{policy[1:].replace('/','_')}.json"
             
-            ret = self.export_waf_policy(policy,policy_export_path,export_mode)
+            logger.info(f"Exporting WAF policy '{policy}' to the file '{output}'.")
+        
+            ret = self._export_waf_policy(policy,export_mode)
             if ret != 0:
+                logger.error(f"Failed to export the WAF policy.")
                 return ret
+
+            ret = self._download_waf_policy()
+            if ret != 0:
+                logger.error(f"Failed to export the WAF policy.")
+                return ret
+
+            ret = self._save_waf_policy(output)
+            if ret != 0:
+                logger.error(f"Failed to export the WAF policy.")
+                return ret
+
+            self._export_waf_policy_cleanup()
+
+            logger.info(f"WAF policy successfully exported.")
             
         return 0
 
