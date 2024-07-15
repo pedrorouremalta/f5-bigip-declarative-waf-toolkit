@@ -252,7 +252,7 @@ class AWAF:
             time.sleep(1)
 
         if task_status != "COMPLETED":
-            logger.error("Failed to export the learning suggestions for the policy {policy}.")
+            logger.error(f"Failed to export the learning suggestions for the policy {policy}.")
             return 1
 
         self._export_waf_suggestions_data = json_resp['result']
@@ -364,7 +364,7 @@ class AWAF:
 
         json_resp = json.loads(r.text)
 
-        logger.debug(f"Waiting for the 'import-policy' task to complete.")
+        logger.debug("Waiting for the 'import-policy' task to complete.")
 
         task_id = json_resp['id']
         url = f"{self._base_url}/mgmt/tm/asm/tasks/import-policy/{task_id}"
@@ -388,15 +388,15 @@ class AWAF:
             time.sleep(1)
 
         if task_status != "COMPLETED":
-            logger.error(f"The 'import-policy' task failed or timed out.")
+            logger.error("The 'import-policy' task failed or timed out.")
 
-        logger.debug(f"The 'import-policy' task completed successfully.")
+        logger.debug("The 'import-policy' task completed successfully.")
         
         return 0
 
     def _apply_waf_policy(self) -> int:
 
-        logger.debug(f"Running a 'apply-policy' task.")
+        logger.debug("Running a 'apply-policy' task.")
 
         url = f"{self._base_url}/mgmt/tm/asm/tasks/apply-policy/"
 
@@ -413,7 +413,7 @@ class AWAF:
         
         json_resp = json.loads(r.text)
 
-        logger.debug(f"Waiting for the 'apply-policy' task to complete.")
+        logger.debug("Waiting for the 'apply-policy' task to complete.")
 
         task_id = json_resp['id']
         url = f"{self._base_url}/mgmt/tm/asm/tasks/apply-policy/{task_id}"
@@ -437,10 +437,10 @@ class AWAF:
             time.sleep(1)
 
         if task_status != "COMPLETED":
-            logger.debug(f"The 'apply-policy' task failed or timed out.")
+            logger.debug("The 'apply-policy' task failed or timed out.")
             return 1
 
-        logger.debug(f"WAF Policy successfully applied.")
+        logger.debug("WAF Policy successfully applied.")
 
         return 0
 
@@ -513,27 +513,27 @@ class AWAF:
 
         ret = self._get_waf_policies()
         if ret != 0:
-            logger.error(f"Failed to export the WAF policy.")
+            logger.error("Failed to export the WAF policy.")
             return ret
         
         ret = self._export_waf_policy(policy,export_mode)
         if ret != 0:
-            logger.error(f"Failed to export the WAF policy.")
+            logger.error("Failed to export the WAF policy.")
             return ret
 
         ret = self._download_waf_policy()
         if ret != 0:
-            logger.error(f"Failed to export the WAF policy.")
+            logger.error("Failed to export the WAF policy.")
             return ret
 
         ret = self._save_waf_policy(output)
         if ret != 0:
-            logger.error(f"Failed to export the WAF policy.")
+            logger.error("Failed to export the WAF policy.")
             return ret
 
         self._export_waf_policy_cleanup()
 
-        logger.info(f"WAF policy successfully exported.")
+        logger.info("WAF policy successfully exported.")
 
         return 0
 
@@ -543,22 +543,22 @@ class AWAF:
 
         ret = self._get_waf_policies()
         if ret != 0:
-            logger.error(f"Failed to export the learning suggestions.")
+            logger.error("Failed to export the learning suggestions.")
             return ret
 
         ret = self._export_waf_suggestions(policy)
         if ret != 0:
-            logger.error(f"Failed to export the learning suggestions.")
+            logger.error("Failed to export the learning suggestions.")
             return ret
         
         ret = self._save_waf_suggestions(output)
         if ret != 0:
-            logger.error(f"Failed to export the learning suggestions.")
+            logger.error("Failed to export the learning suggestions.")
             return ret
 
         self._export_waf_suggestions_cleanup()
 
-        logger.info(f"Learning suggestions successfully exported.")
+        logger.info("Learning suggestions successfully exported.")
 
         return 0
 
@@ -588,9 +588,9 @@ class AWAF:
         self._import_waf_policy_cleanup()
 
         if suggestions_file:
-            logger.info(f"WAF Policy successfully imported (suggestions applied).")
+            logger.info("WAF Policy successfully imported (suggestions applied).")
         else:
-            logger.info(f"WAF Policy successfully imported (no suggestions).")
+            logger.info("WAF Policy successfully imported (no suggestions).")
 
         return 0
 
@@ -598,12 +598,12 @@ class AWAF:
 
         ret = self._get_waf_policies()
         if ret != 0:
-            logger.error(f"Failed to export all WAF policies.")
+            logger.error("Failed to export all WAF policies.")
             return ret
         
         ret = self._export_all_waf_policies(directory,export_mode)
         if ret != 0:
-            logger.error(f"Failed to export all WAF policies.")
+            logger.error("Failed to export all WAF policies.")
             return ret
         
         return 0
