@@ -562,7 +562,7 @@ class AWAF:
 
         return 0
 
-    def import_waf_policy(self,policy,policy_file,suggestions_file=None):
+    def import_waf_policy(self,policy,policy_file,suggestions_file=None) -> int:
 
         if suggestions_file:
             logger.info(f"Importing WAF policy '{policy}' from file '{policy_file}' with suggestions from '{suggestions_file}'.")
@@ -594,7 +594,7 @@ class AWAF:
 
         return 0
 
-    def export_all_waf_policies(self,directory,export_mode):
+    def export_all_waf_policies(self,directory,export_mode) -> int:
 
         ret = self._get_waf_policies()
         if ret != 0:
