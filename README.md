@@ -119,19 +119,101 @@ $python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $
 To import a WAF policy **without** suggestions (only *--policy-file* option):
 
 ```
-python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app2 --policy-file ./asmpolicy_app2.json
+python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app1 --policy-file ./asmpolicy_app1.json
 ```
 ```
-[INFO]: Importing WAF policy '/Common/asmpolicy_app2' from file './tmp/asmpolicy_app2.json' (no suggestions).
+[INFO]: Importing WAF policy '/Common/asmpolicy_app1' from file './tmp/asmpolicy_app1.json' (no suggestions).
 [INFO]: WAF Policy successfully imported (no suggestions).
 ```
 
 To import a WAF policy **with** suggestions (*--policy-file* and *--suggestions-file*):
 
 ```
-$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app2 --policy-file ./tmp/asmpolicy_app2.json --suggestions-file ./tmp/asmpolicy_app2.suggestions.json
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action import-waf-policy --policy /Common/asmpolicy_app1 --policy-file ./tmp/asmpolicy_app1.json --suggestions-file ./tmp/asmpolicy_app1.suggestions.json
 ```
 ```
-[INFO]: Importing WAF policy '/Common/asmpolicy_app2' from file './tmp/asmpolicy_app2.json' with suggestions from './tmp/asmpolicy_app2.suggestions.json'.
+[INFO]: Importing WAF policy '/Common/asmpolicy_app1' from file './tmp/asmpolicy_app1.json' with suggestions from './tmp/asmpolicy_app1.suggestions.json'.
 [INFO]: WAF Policy successfully imported (suggestions applied).
+```
+
+## Exporting all WAF policies:
+
+To export all WAF policies in a declarative format:
+
+```
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-all-waf-policies --directory ./tmp
+```
+```
+[INFO]: Exporting WAF policy '/Common/asmpolicy_app4' to the file './tmp/Common_asmpolicy_app4.json'.
+[INFO]: WAF policy successfully exported.
+[INFO]: Exporting WAF policy '/Common/asmpolicy_app3' to the file './tmp/Common_asmpolicy_app3.json'.
+[INFO]: WAF policy successfully exported.
+[INFO]: Exporting WAF policy '/Common/asmpolicy_app2' to the file './tmp/Common_asmpolicy_app2.json'.
+[INFO]: WAF policy successfully exported.
+[INFO]: Exporting WAF policy '/Common/asmpolicy_app1' to the file './tmp/Common_asmpolicy_app1.json'.
+[INFO]: WAF policy successfully exported.
+```
+
+To export all WAF policies in a declarative format using **full** export mode (*--export-mode full*) and with **debug** mode enabled:
+
+```
+$python f5-bigip-declarative-waf-toolkit.py --device $BIGIP_ADDRESS --username $BIGIP_USERNAME --password $BIGIP_PASSWORD --action export-all-waf-policies --directory ./tmp --export-mode full --log-level debug
+```
+```
+[DEBUG]: Retrieving WAF policies.
+[DEBUG]: Starting new HTTPS connection (1): X.X.X.X:443
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/policies?$select=name,id,fullPath,link HTTP/11" 200 1032
+[DEBUG]: WAF policies successfully retrieved.
+[INFO]: Exporting WAF policy '/Common/asmpolicy_app4' to the file './tmp/Common_asmpolicy_app4.json'.
+[DEBUG]: Running a 'export-policy' task.
+[DEBUG]: https://X.X.X.X:443 "POST /mgmt/tm/asm/tasks/export-policy HTTP/11" 201 599
+[DEBUG]: Waiting for the 'export-policy' task to complete.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-policy/RAGAO3Mbem8nTme6ddCRRQ HTTP/11" 200 647
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-policy/RAGAO3Mbem8nTme6ddCRRQ HTTP/11" 200 781
+[DEBUG]: The 'export-policy' task completed successfully.
+[DEBUG]: Downloading the exported WAF policy.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/file-transfer/downloads/Common-asmpolicy_app4.json HTTP/11" 200 79282
+[DEBUG]: WAF Policy successfully downloaded.
+[DEBUG]: Saving WAF policy to file.
+[DEBUG]: WAF Policy sucessfully saved to file.
+[INFO]: WAF policy successfully exported.
+[INFO]: Exporting WAF policy '/Common/asmpolicy_app3' to the file './tmp/Common_asmpolicy_app3.json'.
+[DEBUG]: Running a 'export-policy' task.
+[DEBUG]: https://X.X.X.X:443 "POST /mgmt/tm/asm/tasks/export-policy HTTP/11" 201 599
+[DEBUG]: Waiting for the 'export-policy' task to complete.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-policy/1hNygdNygB0xs4vIPFEOpA HTTP/11" 200 647
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-policy/1hNygdNygB0xs4vIPFEOpA HTTP/11" 200 781
+[DEBUG]: The 'export-policy' task completed successfully.
+[DEBUG]: Downloading the exported WAF policy.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/file-transfer/downloads/Common-asmpolicy_app3.json HTTP/11" 200 79282
+[DEBUG]: WAF Policy successfully downloaded.
+[DEBUG]: Saving WAF policy to file.
+[DEBUG]: WAF Policy sucessfully saved to file.
+[INFO]: WAF policy successfully exported.
+[INFO]: Exporting WAF policy '/Common/asmpolicy_app2' to the file './tmp/Common_asmpolicy_app2.json'.
+[DEBUG]: Running a 'export-policy' task.
+[DEBUG]: https://X.X.X.X:443 "POST /mgmt/tm/asm/tasks/export-policy HTTP/11" 201 598
+[DEBUG]: Waiting for the 'export-policy' task to complete.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-policy/h0rfMIzpxbyKG7T0STPxgg HTTP/11" 200 646
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-policy/h0rfMIzpxbyKG7T0STPxgg HTTP/11" 200 781
+[DEBUG]: The 'export-policy' task completed successfully.
+[DEBUG]: Downloading the exported WAF policy.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/file-transfer/downloads/Common-asmpolicy_app2.json HTTP/11" 200 79243
+[DEBUG]: WAF Policy successfully downloaded.
+[DEBUG]: Saving WAF policy to file.
+[DEBUG]: WAF Policy sucessfully saved to file.
+[INFO]: WAF policy successfully exported.
+[INFO]: Exporting WAF policy '/Common/asmpolicy_app1' to the file './tmp/Common_asmpolicy_app1.json'.
+[DEBUG]: Running a 'export-policy' task.
+[DEBUG]: https://X.X.X.X:443 "POST /mgmt/tm/asm/tasks/export-policy HTTP/11" 201 599
+[DEBUG]: Waiting for the 'export-policy' task to complete.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-policy/6tlsIuw8sNWi2-Hf-0hjmQ HTTP/11" 200 647
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/tasks/export-policy/6tlsIuw8sNWi2-Hf-0hjmQ HTTP/11" 200 781
+[DEBUG]: The 'export-policy' task completed successfully.
+[DEBUG]: Downloading the exported WAF policy.
+[DEBUG]: https://X.X.X.X:443 "GET /mgmt/tm/asm/file-transfer/downloads/Common-asmpolicy_app1.json HTTP/11" 200 79323
+[DEBUG]: WAF Policy successfully downloaded.
+[DEBUG]: Saving WAF policy to file.
+[DEBUG]: WAF Policy sucessfully saved to file.
+[INFO]: WAF policy successfully exported.
 ```
